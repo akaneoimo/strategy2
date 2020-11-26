@@ -1,0 +1,28 @@
+{
+    "config_name": "HAN_0",
+
+    "word_vector_file": "../../TencentChineseEmbedding/Tencent_AILab_ChineseEmbedding.txt",
+
+    "train_data_file": "data_train.json",
+    "valid_data_file": "data_valid.json",
+    "test_data_file" : "data_test.json",
+
+    "data_config": {
+        "document_length": 60,
+        "sentence_length": 100
+    },
+
+    "model_name"  : "HAN",
+
+    "model_config": {
+        "hidden_size_rnn": 128,
+        "hidden_size_att": 128,
+        "hidden_size_cls": 128,
+        "dropout_prob": 0.5
+    },
+
+    "batch_size"   : 50,
+    "num_epochs"   : 100,
+    "early_stop"   : 20,
+    "info_interval": 20
+}

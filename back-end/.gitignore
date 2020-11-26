@@ -1,0 +1,15 @@
+.vscode/
+pyrightconfig.json
+
+*.xlsx
+*.sql
+
+__pycache__/
+
+/data/
+/temp/
+/dist/
+
+/News_demo/data/
+/News_demo/cache/
+/News_demo/log/
