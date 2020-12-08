@@ -52,7 +52,7 @@ CUDA_VISIBLE_DEVICES=0 uvicorn main:app --host 0.0.0.0
 - nvidia显卡驱动
 - cuda=9.0
 
-如果使用原生的python，cuda9.0可参照 `https://developer.nvidia.com/cuda-90-download-archive` 方式安装
+如果使用原生的python，cuda9.0可参照 [官网](https://developer.nvidia.com/cuda-90-download-archive) 方式安装
 
 如果是基于conda环境的python，可以用
 
