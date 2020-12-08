@@ -1,4 +1,6 @@
 import os
+import asyncio
+import concurrent
 from datetime import datetime
 
 from fastapi import APIRouter, BackgroundTasks
@@ -58,14 +60,19 @@ async def train_task():
         await database.execute(status.update(whereclause=sqlalchemy.text(f'name="train"')).values(
             value=0,
         ))
-        
+
+def test_endpoint():
+    print('yes')
 
 @router.post('/train', status_code=202)
 async def train_(background_tasks: BackgroundTasks):
     record = await database.fetch_one(status.select(whereclause=sqlalchemy.text(f'name="train"')))
     if record['value']:
         return {'code': 1, 'data': {'message': '模型正在训练中，请稍后重试'}}
-    background_tasks.add_task(train_task)
+    # background_tasks.add_task(train_task)
+    loop = asyncio.get_event_loop()
+    with concurrent.futures.ProcessPoolExecutor() as pool:
+        await loop.run_in_executor(pool, test_endpoint)
     return {'code': 0, 'data': {'message': '开始训练模型'}}
 
 

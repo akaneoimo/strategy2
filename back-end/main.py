@@ -31,17 +31,17 @@ async def main():
 
 @app.get('/admin/topic')
 async def redirect():
-    return RedirectResponse('/')
+    return HTMLResponse(index_html, status_code=200)
 
 
 @app.get('/admin/strategy')
 async def redirect():
-    return RedirectResponse('/')
+    return HTMLResponse(index_html, status_code=200)
 
 
 @app.get('/event')
 async def redirect():
-    return RedirectResponse('/')
+    return HTMLResponse(index_html, status_code=200)
 
 
 @app.on_event('startup')
