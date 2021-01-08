@@ -28,7 +28,7 @@ class Counter:
 
 class PredictInput(BaseModel):
     news: List
-    topic: Optional[str] = None
+    # topic: Optional[str] = None
     max_num: Optional[int] = 5
 
 
@@ -41,9 +41,6 @@ async def predict(data: PredictInput):
     counter = Counter()
     predictions = [[int(str_id) for str_id in prediction['strategy_ids']] for prediction in predictor.predict(data.news)]
 
-    topic_record = await database.fetch_one(topics.select().where(whereclause=sqlalchemy.text(f'topic="{data.dict().get("topic", "")}"')))
-    strategy_details = await database.fetch_all(strategies.select())
-
     for prediction in predictions:
         for id_ in prediction:
             counter(id_)
@@ -53,10 +50,7 @@ async def predict(data: PredictInput):
     max_items = [{'id': id_, 'value': round(value / sumup, 4)} for id_, value in max_items]
 
     return {
-        'strategy_ids': predictions,
         'sumup': max_items,
-        'strategy_details': strategy_details,
-        'issue': topic_record and topic_record['issue'],
     }
 
 
